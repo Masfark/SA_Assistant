@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.shop_list.ActivityDelShop">
+
+    <EditText
+        android:id="@+id/etDelShop"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/textHint"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="@string/ShopNumber"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/btnDelShop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:text="@string/DelShop" />
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:text="@string/Close" />
+
+</LinearLayout>

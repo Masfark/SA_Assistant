@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".ui.users.UsersFragment">
+
+    <EditText
+        android:id="@+id/editSaName"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/textHint"
+        android:layout_margin="10dp"
+        android:gravity="start|top"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="10dp"
+        android:ems="10"
+        android:inputType="textCapWords"
+        android:hint="@string/FIO" />
+
+    <Button
+        android:id="@+id/addSaButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:text="@string/AddUser" />
+
+    <Button
+        android:id="@+id/delSaButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:text="@string/DelUser" />
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.sa_assistant.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_shop_list"
+        android:name="com.example.sa_assistant.ui.shop_list.ShopListFragment"
+        android:label="@string/menu_shop_list"
+        tools:layout="@layout/fragment_shop_list" />
+
+    <fragment
+        android:id="@+id/nav_reports"
+        android:name="com.example.sa_assistant.ui.reports.ReportMenuFragment"
+        android:label="@string/menu_reports"
+        tools:layout="@layout/fragment_report_menu" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_users"
+        android:name="com.example.sa_assistant.ui.users.UsersFragment"
+        android:label="@string/Users"
+        tools:layout="@layout/fragment_users" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_parser"
+        android:name="com.example.sa_assistant.ui.parser.ParsFragment"
+        android:label="@string/Pars"
+        tools:layout="@layout/fragment_pars" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_notes"
+        android:name="com.example.sa_assistant.ui.notes.NotesChooseShopFragment"
+        android:label="@string/menu_notes"
+        tools:layout="@layout/fragment_notes_choose_shop" >
+
+    </fragment>
+</navigation>

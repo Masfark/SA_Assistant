@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.users.ActivityDelUser">
+
+    <Spinner
+        android:id="@+id/spinDelUser"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:minHeight="45dp"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/btnDelUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:text="@string/DelUser" />
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:text="@string/Close" />
+
+</LinearLayout>

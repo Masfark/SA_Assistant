@@ -1,0 +1,2 @@
+rootProject.name='SA_Assistant'
+include ':app'
