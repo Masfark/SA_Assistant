@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">SA Assistant</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">SA Assistant</string>
     <string name="nav_header_subtitle">Test version v.1.2</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -21,13 +19,16 @@
     <string name="clear_btn">Очистить</string>
     <string name="ShopOOO">OOO</string>
     <string name="kbsa">KBSA</string>
+    <string name="displacement">Перемещения</string>
+    <string name="from">Откуда</string>
+    <string name="to">Куда</string>
     <string name="btn_add_rep">+</string>
     <string name="btn_del_rep">-</string>
 
 
     // Pars v.3.0 strings
 
-    <string name="editTextHint">Введите номера магазинов ...</string>
+    <string name="editTextHint">Введите номера магазинов …</string>
     <string name="add_rep_hint">Напишите отчет</string>
     <string name="note_hint">Запишите неообходимую информацию</string>
     <string name="checkButton">Проверить магазины</string>
@@ -75,6 +76,7 @@
         <item>ЕГАИС (стоп)</item>
         <item>ЕГАИС (замена)</item>
         <item>ЕГАИС (UTM)</item>
+        <item>Проверка резерва</item>
 
     </string-array>
 
@@ -115,6 +117,9 @@
         <item>
             Проблема: нет стартуют службы UTM\n\nРешение: Перезагрузка базы, запуск служб вручную.\n\n
             Комментарий: магазин не торговал крепким алкоголем с
+        </item>
+        <item>
+            \ - системный блок 1шт, образ актуальный, проблем по комплектующим нет - дата проверки
         </item>
     </string-array>
 

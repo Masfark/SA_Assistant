@@ -92,7 +92,7 @@ public class BotReportFragment extends Fragment implements View.OnClickListener 
     public void reportsListCreate() {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         Cursor cursor = database.rawQuery("SELECT _id, report, report_check FROM Kbsa_reports", null);
-        BotReportsAdapter adapter = new BotReportsAdapter(database, cursor);
+        BotReportsAdapter adapter = new BotReportsAdapter(getContext());
         recyclerViewReports.setAdapter(adapter);
     }
 

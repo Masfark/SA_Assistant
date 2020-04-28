@@ -1,8 +1,10 @@
 package com.example.sa_assistant.adapters;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +20,20 @@ import com.example.sa_assistant.R;
 
 public class BotReportsAdapter extends RecyclerView.Adapter<BotReportsAdapter.ViewHolder>{
 
-    public Cursor cursor;
+    public Cursor cursor, cursor1;
     public SQLiteDatabase database;
+    public DBHelper dbHelper;
+    public Context context;
+    final static String TAG = "MyLogs";
 
-    public BotReportsAdapter(SQLiteDatabase database, Cursor cursor) {
-        this.cursor = cursor;
-        this.database = database;
+    public BotReportsAdapter(Context context) {
+        this.context = context;
+
+        dbHelper = new DBHelper(context);
+        database = dbHelper.getWritableDatabase();
+        cursor = database.rawQuery("SELECT _id, report, report_check FROM Kbsa_reports", null);
     }
+
 
     @NonNull
     @Override
@@ -53,13 +62,13 @@ public class BotReportsAdapter extends RecyclerView.Adapter<BotReportsAdapter.Vi
 
         TextView textView;
         CheckBox checkBox;
-        DBHelper dbHelper;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textView = itemView.findViewById(R.id.tv_adapter);
             checkBox = itemView.findViewById(R.id.cb_adapter);
+
         }
 
         void Bind(final Cursor cursor, int position) {
@@ -73,28 +82,38 @@ public class BotReportsAdapter extends RecyclerView.Adapter<BotReportsAdapter.Vi
             else {
                 cursor.moveToPosition(position);
 
-                final String id = cursor.getString(cursor.getColumnIndex("_id"));
                 String report = cursor.getString(cursor.getColumnIndex("report"));
-                String checked = cursor.getString(cursor.getColumnIndex("report_check"));
 
                 textView.setText(report);
-                checkBox.setChecked(Boolean.parseBoolean(checked));
 
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
+                            Integer idAd = getAdapterPosition() + 1;
+                            Log.d(TAG, "Position adapter - " + idAd);
+                            String id = idAd.toString();
+                            Log.d(TAG, "Position cursor - " + id);
                             ContentValues contentValues = new ContentValues();
                             contentValues.put(dbHelper.KEY_REPORT_CHECK, "true");
                             database.update(dbHelper.TABLE_KBSA_REPORTS, contentValues, dbHelper.KEY_ID_REPORT + "= ?", new String[] {id});
                         }
                         else {
+                            Integer idAd = getAdapterPosition() + 1;
+                            Log.d(TAG, "Position adapter - " + idAd);
+                            String id = idAd.toString();
+                            Log.d(TAG, "Position cursor - " + id);
                             ContentValues contentValues = new ContentValues();
                             contentValues.put(dbHelper.KEY_REPORT_CHECK, "false");
                             database.update(dbHelper.TABLE_KBSA_REPORTS, contentValues, dbHelper.KEY_ID_REPORT + "= ?", new String[] {id});
                         }
                     }
                 });
+
+                cursor1 = database.rawQuery("SELECT _id, report, report_check FROM Kbsa_reports", null);
+                cursor1.moveToPosition(position);
+                String checked = cursor1.getString(cursor.getColumnIndex("report_check"));
+                checkBox.setChecked(Boolean.parseBoolean(checked));
             }
 
         }

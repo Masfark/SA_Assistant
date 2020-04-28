@@ -13,8 +13,8 @@ import com.example.sa_assistant.R;
 
 public class ReportMenuFragment extends Fragment implements View.OnClickListener {
 
-    Button btn_rep, btn_kbsa;
-    Fragment fragmentReports, fragmentKBSA;
+    Button btn_rep, btn_kbsa, btn_displacement;
+    Fragment fragmentReports, fragmentKBSA, fragmentDisplacement;
     FragmentTransaction fTrans;
 
     @Override
@@ -26,9 +26,13 @@ public class ReportMenuFragment extends Fragment implements View.OnClickListener
         btn_rep.setOnClickListener(this);
         btn_kbsa = root.findViewById(R.id.btn_menu_kbsa);
         btn_kbsa.setOnClickListener(this);
+        btn_displacement = root.findViewById(R.id.btn_menu_displacement);
+        btn_displacement.setOnClickListener(this);
 
         fragmentReports = new ReportsFragment();
         fragmentKBSA = new BotReportFragment();
+        fragmentDisplacement = new DisplacementFragment();
+
 
         return root;
     }
@@ -43,6 +47,9 @@ public class ReportMenuFragment extends Fragment implements View.OnClickListener
         }
         else if (id == R.id.btn_menu_kbsa) {
             fTrans.add(R.id.fragment_report_menu, fragmentKBSA);
+        }
+        else if (id == R.id.btn_menu_displacement) {
+            fTrans.add(R.id.fragment_report_menu, fragmentDisplacement);
         }
         fTrans.addToBackStack("Reports menu");
         fTrans.commit();

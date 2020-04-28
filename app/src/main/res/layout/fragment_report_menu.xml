@@ -29,5 +29,13 @@
             android:text="@string/kbsa"
             android:textColor="@color/colorPrimary" />
 
+        <Button
+            android:id="@+id/btn_menu_displacement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/btn_margin"
+            android:text="@string/displacement"
+            android:textColor="@color/colorPrimary" />
+
     </LinearLayout>
 </FrameLayout>

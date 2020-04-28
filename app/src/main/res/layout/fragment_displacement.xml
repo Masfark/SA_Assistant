@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_report"
+    android:id="@+id/fragment_displacement"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".ui.reports.ReportsFragment">
+    tools:context=".ui.reports.DisplacementFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,48 +19,32 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/txtShops"
+                android:id="@+id/fromShop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/ShopList"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/spinShops"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/txtSa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/SA"
+                android:text="@string/from"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
 
             <Spinner
-                android:id="@+id/spinSa"
+                android:id="@+id/spinFrom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/txtReports"
+                android:id="@+id/toShop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/ReportType"
+                android:text="@string/to"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
 
             <Spinner
-                android:id="@+id/spinReports"
+                android:id="@+id/spinTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
 
             <EditText
                 android:id="@+id/reportForm"
@@ -115,4 +98,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </FrameLayout>

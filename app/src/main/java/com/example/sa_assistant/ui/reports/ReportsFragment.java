@@ -285,6 +285,9 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
         String firstReport = (shopNum + " " + shopCity + ", " + shopAddr + "\n\n" + adapter.getItem(idRep) + " "
                 + currentTime + "\n\n" + "СА " + saName);
 
+        String reserveReport = (saName + "\n" + "Резерв №  - " + "№" + shopNum + "(" + shopCity + ", " + shopAddr + ")"
+                + adapter.getItem(idRep) + " " + currentDate + " " + currentTime);
+
         String secondReport = "";
 
         if (differenceTime.equals("")) {
@@ -308,6 +311,9 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
         }
         else if (idRep == 3 || idRep == 5 || idRep == 7 || idRep == 8 ){
             reportForm.setText(secondReport);
+        }
+        else if (idRep == 9) {
+            reportForm.setText(reserveReport);
         }
 
 
