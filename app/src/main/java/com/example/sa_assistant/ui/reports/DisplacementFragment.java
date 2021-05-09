@@ -13,20 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.sa_assistant.DBHelper;
 import com.example.sa_assistant.R;
-import com.example.sa_assistant.adapters.SpinCursorAdapter;
+import com.example.sa_assistant.adapters.Adapters;
 
 public class DisplacementFragment extends Fragment implements View.OnClickListener{
 
 
-    public Button buttonSend, buttonForm, buttonClear;
-    public EditText reportForm;
-    public Spinner spinFrom, spinTo;
-    public DBHelper dbHelper;
+    private Button buttonSend, buttonForm, buttonClear;
+    private CheckBox checkRes;
+    private EditText reportForm;
+    private Spinner spinFrom, spinTo;
+    private DBHelper dbHelper;
 
     final static String TAG = "MyLogs";
 
@@ -41,6 +44,7 @@ public class DisplacementFragment extends Fragment implements View.OnClickListen
         buttonSend.setOnClickListener(this);
         buttonClear = root.findViewById(R.id.buttonClear);
         buttonClear.setOnClickListener(this);
+        checkRes = root.findViewById(R.id.checkReserve);
 
         reportForm = root.findViewById(R.id.reportForm);
 
@@ -57,7 +61,7 @@ public class DisplacementFragment extends Fragment implements View.OnClickListen
             spinFrom.setAdapter(emptyChoose);
             spinTo.setAdapter(emptyChoose);
         } else {
-            SpinCursorAdapter adapter = new SpinCursorAdapter(getActivity(), cursor);
+            Adapters.SpinCursorAdapter adapter = new Adapters.SpinCursorAdapter(getActivity(), cursor);
             spinFrom.setAdapter(adapter);
             spinTo.setAdapter(adapter);
         }
@@ -67,28 +71,54 @@ public class DisplacementFragment extends Fragment implements View.OnClickListen
 
     public String generateReport() {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT _id, number, city, address FROM Shops ORDER BY number ASC", null);
+        Cursor cursor = database.rawQuery("SELECT _id, number, city, address, reserve_number FROM Shops ORDER BY number ASC", null);
 
-        int idShopFrom = spinFrom.getSelectedItemPosition();
-        int idShopTo = spinTo.getSelectedItemPosition();
+        if (cursor.getCount() != 0)
+        {
+            int idShopFrom = spinFrom.getSelectedItemPosition();
+            int idShopTo = spinTo.getSelectedItemPosition();
 
-        cursor.moveToPosition(idShopFrom);
+            cursor.moveToPosition(idShopFrom);
 
-        String shopNum = cursor.getString(cursor.getColumnIndex("number"));
-        String shopCity = cursor.getString(cursor.getColumnIndex("city"));
-        String shopAddr = cursor.getString(cursor.getColumnIndex("address"));
+            String shopNum = cursor.getString(cursor.getColumnIndex("number"));
+            String shopCity = cursor.getString(cursor.getColumnIndex("city"));
+            String shopAddr = cursor.getString(cursor.getColumnIndex("address"));
+            String part1 = "";
 
-        String part1 = ("Прошу сделать перемещение с магазина №" + shopNum + "(" + shopCity + ", " + shopAddr + ")\nна магазин\n");
+            if (checkRes.isChecked()) {
+                String shopReserve = cursor.getString(cursor.getColumnIndex("reserve_number"));
+                if (shopReserve != null) {
+                    part1 = ("Прошу сделать перемещение из резерва №" + shopReserve + " магазина №" + shopNum + "(" + shopCity + ", " + shopAddr + ")\nна ");
+                } else {
+                    part1 = ("Прошу сделать перемещение из магазина №" + shopNum + "(" + shopCity + ", " + shopAddr + ")\nна ");
+                }
+            } else {
+                part1 = ("Прошу сделать перемещение из магазина №" + shopNum + "(" + shopCity + ", " + shopAddr + ")\nна ");
+            }
 
-        cursor.moveToPosition(idShopTo);
-        shopNum = cursor.getString(cursor.getColumnIndex("number"));
-        shopCity = cursor.getString(cursor.getColumnIndex("city"));
-        shopAddr = cursor.getString(cursor.getColumnIndex("address"));
+            cursor.moveToPosition(idShopTo);
+            shopNum = cursor.getString(cursor.getColumnIndex("number"));
+            shopCity = cursor.getString(cursor.getColumnIndex("city"));
+            shopAddr = cursor.getString(cursor.getColumnIndex("address"));
+            String part2 = "";
 
-        String part2 = ("№" + shopNum + "(" + shopCity + ", " + shopAddr + ")\n\n");
-        String report = (part1 + part2 + "код товара ");
+            if (checkRes.isChecked()) {
+                String shopReserve = cursor.getString(cursor.getColumnIndex("reserve_number"));
+                if (shopReserve != null) {
+                    part2 = ("резерв \n№" + shopReserve + " магазина №" + shopNum + "(" + shopCity + ", " + shopAddr + ")\n\n");
+                } else {
+                    part2 = ("магазин \n№" + shopNum + "(" + shopCity + ", " + shopAddr + ")\n\n");
+                }
+            } else {
+                part2 = ("магазин \n№" + shopNum + "(" + shopCity + ", " + shopAddr + ")\n\n");
+            }
 
-        return report;
+
+            String report = (part1 + part2 + "код товара ");
+
+            return report;
+        }
+        return "В списке нет магазинов";
     }
 
     @Override

@@ -37,5 +37,13 @@
             android:text="@string/displacement"
             android:textColor="@color/colorPrimary" />
 
+        <Button
+            android:id="@+id/btn_menu_print_rep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/btn_margin"
+            android:text="@string/print_rep"
+            android:textColor="@color/colorPrimary" />
+
     </LinearLayout>
 </FrameLayout>

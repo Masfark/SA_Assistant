@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sa_assistant">
 
+<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+<!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_x192"
@@ -9,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round_x192"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -17,6 +21,26 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.shop_list.ChangeShopActivity"
+            android:label="Изменить"
+            android:theme="@style/Theme.AppCompat.Light.Dialog">
+            <intent-filter>
+                <action android:name=".ui.shop_list.Activity_change" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.utils.ImportActivity"
+            android:label="@string/title_activity_import"
+            android:theme="@style/Theme.AppCompat.Light.Dialog">
+            <intent-filter>
+                <action android:name=".ui.utils.Activity_import" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -31,7 +55,7 @@
         </activity>
         <activity
             android:name=".ui.shop_list.ActivityDelShop"
-            android:label="@string/AddShop"
+            android:label="@string/DelShop"
             android:theme="@style/Theme.AppCompat.Light.Dialog">
             <intent-filter>
                 <action android:name=".ui.shop_list.Activity_del_shop" />

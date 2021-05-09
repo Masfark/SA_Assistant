@@ -7,15 +7,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.sa_assistant.R;
 
 public class ReportMenuFragment extends Fragment implements View.OnClickListener {
 
-    Button btn_rep, btn_kbsa, btn_displacement;
-    Fragment fragmentReports, fragmentKBSA, fragmentDisplacement;
-    FragmentTransaction fTrans;
+    Button btn_rep, btn_kbsa, btn_displacement, btn_print_rep;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,11 +26,8 @@ public class ReportMenuFragment extends Fragment implements View.OnClickListener
         btn_kbsa.setOnClickListener(this);
         btn_displacement = root.findViewById(R.id.btn_menu_displacement);
         btn_displacement.setOnClickListener(this);
-
-        fragmentReports = new ReportsFragment();
-        fragmentKBSA = new BotReportFragment();
-        fragmentDisplacement = new DisplacementFragment();
-
+        btn_print_rep = root.findViewById(R.id.btn_menu_print_rep);
+        btn_print_rep.setOnClickListener(this);
 
         return root;
     }
@@ -40,18 +35,18 @@ public class ReportMenuFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        fTrans = getChildFragmentManager().beginTransaction();
 
         if (id == R.id.btn_menu_reports) {
-            fTrans.add(R.id.fragment_report_menu, fragmentReports);
+            NavHostFragment.findNavController(ReportMenuFragment.this).navigate(R.id.action_nav_reports_to_nav_report_fragment);
         }
         else if (id == R.id.btn_menu_kbsa) {
-            fTrans.add(R.id.fragment_report_menu, fragmentKBSA);
+            NavHostFragment.findNavController(ReportMenuFragment.this).navigate(R.id.action_nav_reports_to_nav_bot_report_fragment);
         }
         else if (id == R.id.btn_menu_displacement) {
-            fTrans.add(R.id.fragment_report_menu, fragmentDisplacement);
+            NavHostFragment.findNavController(ReportMenuFragment.this).navigate(R.id.action_nav_reports_to_nav_displacement_fragment);
         }
-        fTrans.addToBackStack("Reports menu");
-        fTrans.commit();
+        else if (id == R.id.btn_menu_print_rep) {
+            NavHostFragment.findNavController(ReportMenuFragment.this).navigate(R.id.action_nav_reports_to_nav_print_report_fragment);
+        }
     }
 }

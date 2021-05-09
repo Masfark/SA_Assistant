@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.utils.UtilsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_import_db"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/btn_margin"
+            android:text="@string/btn_import_db"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/btn_export_db"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/btn_margin"
+            android:text="@string/btn_export_db"
+            android:textColor="@color/colorPrimary" />
+
+    </LinearLayout>
+</FrameLayout>

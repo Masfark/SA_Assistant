@@ -1,11 +1,9 @@
 package com.example.sa_assistant.ui.reports;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,29 +27,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.sa_assistant.DBHelper;
 import com.example.sa_assistant.R;
-import com.example.sa_assistant.adapters.SaCursorAdapter;
-import com.example.sa_assistant.adapters.ShopCursorAdapter;
-import com.example.sa_assistant.adapters.SpinCursorAdapter;
+import com.example.sa_assistant.adapters.Adapters;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import javax.xml.datatype.Duration;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
-import static android.content.Context.MODE_PRIVATE;
-import static android.provider.Telephony.Mms.Part.FILENAME;
 
 public class ReportsFragment extends Fragment implements View.OnClickListener {
 
@@ -129,7 +110,7 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
             spinShops.setAdapter(emptyChoose);
         }
         else {
-            SpinCursorAdapter adapter = new SpinCursorAdapter(getActivity(), cursor);
+            Adapters.SpinCursorAdapter adapter = new Adapters.SpinCursorAdapter(getActivity(), cursor);
             spinShops.setAdapter(adapter);
         }
 
@@ -139,7 +120,7 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
             spinSa.setAdapter(emptyChoose);
         }
         else {
-            SaCursorAdapter adapter2 = new SaCursorAdapter(getActivity(), cursor1);
+            Adapters.SaCursorAdapter adapter2 = new Adapters.SaCursorAdapter(getActivity(), cursor1);
             spinSa.setAdapter(adapter2);
         }
 
@@ -206,41 +187,37 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
         return time;
     }
 
-    private void saveTime() {
+    private void saveTime(Cursor cursor, int position) {
 
         String time = roundTime();
 
         SQLiteDatabase timeBase = dbHelper.getWritableDatabase();
-        Cursor cursor = timeBase.rawQuery("SELECT _id, time FROM Time", null);
-
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DBHelper.KEY_TIME, time);
+        contentValues.put(DBHelper.KEY_TIME_START, time);
 
         if (cursor.getCount() == 0) {
-            timeBase.insert(dbHelper.TABLE_DATE_TIME, null, contentValues);
-            timeBase.close();
+            Toast.makeText(getContext(), "В списке нет магазинов", Toast.LENGTH_SHORT).show();
         }
         else {
-            cursor.moveToLast();
+            cursor.moveToPosition(position);
+            Log.d(TAG, "Position - " + cursor.getPosition());
             String id = cursor.getString(cursor.getColumnIndex("_id"));
-            timeBase.update(dbHelper.TABLE_DATE_TIME, contentValues, dbHelper.KEY_ID_TIME + "= ?", new String[]{id});
+            timeBase.update(DBHelper.TABLE_SHOPS, contentValues, DBHelper.KEY_ID + "= ?", new String[]{id});
+            timeBase.close();
         }
 
     }
 
-    private void loadTime() {
+    private void loadTime(Cursor cursor, int position) {
 
-        SQLiteDatabase timeBase = dbHelper.getWritableDatabase();
-        Cursor cursor = timeBase.rawQuery("SELECT time FROM Time", null);
+//        SQLiteDatabase timeBase = dbHelper.getWritableDatabase();
+//        Cursor cursor = timeBase.rawQuery("SELECT start_time FROM Shops", null);
 
         if (cursor.getCount() != 0) {
-            cursor.moveToLast();
-            time = cursor.getString(cursor.getColumnIndex("time"));
+            cursor.moveToPosition(position);
+            time = cursor.getString(cursor.getColumnIndex("start_time"));
             Log.d(TAG, "Count - " + cursor.getCount());
             Log.d(TAG, "Column - " + time);
-        }
-        else {
-            time = "";
         }
 
     }
@@ -248,7 +225,7 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
     private void generateReport() throws ParseException {
 
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT _id, number, address, city, ooo FROM Shops ORDER BY number ASC", null);
+        Cursor cursor = database.rawQuery("SELECT _id, number, address, city, ooo, start_time, end_time FROM Shops ORDER BY number ASC", null);
         Cursor cursor1 = database.rawQuery("SELECT _id, username FROM Users", null);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.Reports, R.layout.simple_item_list);
 
@@ -265,14 +242,15 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
         String saName = cursor1.getString(cursor1.getColumnIndex("username"));
 
         String currentTime = roundTime();
+        loadTime(cursor, idShop);
         String differenceTime = "";
-        loadTime();
-        if (time.equals("")) {
-
-        }
-        else {
+        loadTime(cursor, idShop);
+        if (differenceTime.equals("") & time != null) {
             differenceTime = differenceTime(time, currentTime);
             Log.d(TAG, "Difference Time - " + differenceTime);
+        }
+        else {
+            differenceTime = time;
         }
 
 
@@ -290,13 +268,18 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
 
         String secondReport = "";
 
-        if (differenceTime.equals("")) {
-             secondReport = (shopNum + " " + shopCity + ", " + shopAddr + "\n\n" + adapter.getItem(idRep) + " "
-                    + time + " до " + currentTime + "\n\n" + "СА " + saName);
+        if (differenceTime == null) {
+//             secondReport = (shopNum + " " + shopCity + ", " + shopAddr + "\n\n" + adapter.getItem(idRep) + " "
+//                    + time + " до " + currentTime + "\n\n" + "СА " + saName);
+            secondReport = ("Отчет о выключении для этого магазина не был сформирован");
         }
-        else {
+        else if (!differenceTime.equals("")){
              secondReport = (shopNum + " " + shopCity + ", " + shopAddr + "\n\n" + adapter.getItem(idRep) + " "
                     + time + " до " + currentTime + " (" + differenceTime + ")" + "\n\n" + "СА " + saName);
+        }
+        else {
+            secondReport = (shopNum + " " + shopCity + ", " + shopAddr + "\n\n" + adapter.getItem(idRep) + " "
+                    + time + " до " + currentTime + "\n\n" + "СА " + saName);
         }
 
         if (idRep == 0) {
@@ -307,7 +290,7 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
         }
         else if (idRep == 2 || idRep == 4 || idRep == 6 ){
             reportForm.setText(firstReport);
-            saveTime();
+            saveTime(cursor, idShop);
         }
         else if (idRep == 3 || idRep == 5 || idRep == 7 || idRep == 8 ){
             reportForm.setText(secondReport);
@@ -316,10 +299,6 @@ public class ReportsFragment extends Fragment implements View.OnClickListener {
             reportForm.setText(reserveReport);
         }
 
-
-        cursor.close();
-        cursor1.close();
-        database.close();
 
     }
 

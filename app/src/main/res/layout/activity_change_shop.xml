@@ -57,25 +57,25 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/checkReserve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_gravity="left|center"
-        android:text="Резерв" />
+        <CheckBox
+            android:id="@+id/checkReserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="left|center"
+            android:text="Резерв" />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnAddShop"
+        android:id="@+id/btnChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:layout_marginTop="30dp"
-        android:text="@string/AddShop" />
+        android:text="@string/btn_change" />
 
     <Button
         android:id="@+id/btnClose"

@@ -5,40 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.reports.ActivityAddBotReport">
+    tools:context=".ui.utils.ImportActivity">
+
 
     <EditText
-        android:id="@+id/etRepText"
-        android:backgroundTint="@color/colorPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ed_import"
+        android:backgroundTint="#fff"
+        android:layout_width="250dp"
+        android:layout_height="300dp"
         android:textColorHint="@color/textHint"
         android:layout_marginBottom="20dp"
         android:layout_gravity="center"
+        android:gravity="start"
+        android:textSize="16sp"
         android:layout_margin="20dp"
-        android:ems="10"
-        android:hint="@string/add_rep_hint"
-        android:inputType="textCapSentences" />
+        android:hint="Номер,Город,Адрес,ООО,Номер резерва(если есть)"
+        android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/btn_add_bot_rep"
+        android:id="@+id/btn_import"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
-        android:layout_marginTop="30dp"
-        android:text="@string/add_bot_report" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Загрузить" />
 
     <Button
-        android:id="@+id/btnClose"
+        android:id="@+id/btn_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
         android:text="@string/Close" />
 
 </LinearLayout>

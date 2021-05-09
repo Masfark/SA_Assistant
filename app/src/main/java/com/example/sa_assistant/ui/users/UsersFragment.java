@@ -55,16 +55,19 @@ public class UsersFragment extends Fragment implements View.OnClickListener {
 
             String name = editSaName.getText().toString();
 
-            SQLiteDatabase database = dbHelper.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
+            if (name.equals("")) {
+                Toast.makeText(getActivity(), "Введите имя пользователя.", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                SQLiteDatabase database = dbHelper.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
 
-            contentValues.put(dbHelper.KEY_USERNAME, name);
-            database.insert(dbHelper.TABLE_USERS, null, contentValues);
+                contentValues.put(dbHelper.KEY_USERNAME, name);
+                database.insert(dbHelper.TABLE_USERS, null, contentValues);
 
-            Toast.makeText(getActivity(), "Пользователь - " + name + " добавлен.", Toast.LENGTH_SHORT).show();
-            editSaName.setText("");
-
-            dbHelper.close();
+                Toast.makeText(getActivity(), "Пользователь - " + name + " добавлен.", Toast.LENGTH_SHORT).show();
+                editSaName.setText("");
+            }
         }
         else if (id == R.id.delSaButton) {
             Intent intent = new Intent(getActivity(), ActivityDelUser.class);

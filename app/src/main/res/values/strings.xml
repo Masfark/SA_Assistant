@@ -1,14 +1,22 @@
 <resources>
     <string name="app_name">SA Assistant</string>
     <string name="nav_header_title">SA Assistant</string>
-    <string name="nav_header_subtitle">Test version v.1.2</string>
+    <string name="nav_header_subtitle">Version 1.5</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Настройки</string>
 
+    // Menu items
+
+    <string name="Menu">Меню</string>
     <string name="menu_home">Главная</string>
     <string name="menu_shop_list">Список магазинов</string>
     <string name="menu_reports">Отчеты</string>
     <string name="menu_notes">Заметки</string>
+    <string name="menu_users">Пользователи</string>
+    <string name="menu_utils">Утилиты</string>
+    <string name="menu_reference">Справка</string>
+
+    // Buttons
 
     <string name="add_shop_btn">Добавить магазин</string>
     <string name="del_shop_btn">Удалить магазин</string>
@@ -24,9 +32,16 @@
     <string name="to">Куда</string>
     <string name="btn_add_rep">+</string>
     <string name="btn_del_rep">-</string>
+    <string name="sn">Серийный номер</string>
+    <string name="date_trans">Даты прибытия и отправки</string>
+    <string name="print_rep">Отчет по принтерам</string>
+    <string name="btn_import_db">Ипортировать список</string>
+    <string name="btn_export_db">Экспортировать список</string>
+    <string name="btn_change">Изменить</string>
 
+    //Activity
 
-    // Pars v.3.0 strings
+    <string name="title_activity_import">Импорт списка магазинов</string>
 
     <string name="editTextHint">Введите номера магазинов …</string>
     <string name="add_rep_hint">Напишите отчет</string>
@@ -42,16 +57,20 @@
     <string name="SA">Системный администратор</string>
     <string name="ReportType">Тип отчета</string>
     <string name="ReportHint">Сформируйте отчет</string>
+    <string name="PrintReportHint">Введите серийный номер</string>
     <string name="FIO">Фамилия И.О.</string>
-    <string name="Users">Пользователи</string>
+
     <string name="ChooseUser">Выберите пользователя</string>
     <string name="AddUser">Добавить пользователя</string>
     <string name="DelUser">Удалить пользователя</string>
-    <string name="Menu">Меню</string>
+
     <string name="Reports">Отчеты</string>
     <string name="Send">Отправить</string>
     <string name="Clear">Очистить</string>
     <string name="Close">Закрыть</string>
+    <string name="Reserve">Резерв</string>
+
+    // Arrays
 
     <string-array name="emptyChoose">
         <item>Список пуст</item>
@@ -89,7 +108,7 @@
             Проблемы с терминалом оплаты на 1-ой кассе БТ --- а именно:\n
             1. \n\n
 
-            Внешне оборудование в порядке. Рекомендуемые действия от тех.поддержки никаких изменений не дали.\n\n
+            Внешнее оборудование в порядке. Рекомендуемые действия от тех.поддержки никаких изменений не дали.\n\n
 
             Подал заявку в службу поддержки СБРФ:\n
         </item>
@@ -122,7 +141,15 @@
             \ - системный блок 1шт, образ актуальный, проблем по комплектующим нет - дата проверки
         </item>
     </string-array>
+    <string name="title_activity_change_shop">ChangeShopActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
 </resources>

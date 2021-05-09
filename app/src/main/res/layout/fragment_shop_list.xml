@@ -5,57 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.shop_list.ShopListFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <LinearLayout
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/shop_list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/shop_list_view"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_margin="10dp" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="15dp"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_add_24" />
 
-            <Button
-                android:id="@+id/add_shop_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/add_shop_btn"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/del_shop_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/del_shop_btn"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/clear_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/clear_btn"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-    </ScrollView>
 </FrameLayout>

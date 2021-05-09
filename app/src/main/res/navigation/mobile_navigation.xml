@@ -9,9 +9,7 @@
         android:id="@+id/nav_home"
         android:name="com.example.sa_assistant.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
-
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
 
     <fragment
         android:id="@+id/nav_shop_list"
@@ -25,14 +23,54 @@
         android:label="@string/menu_reports"
         tools:layout="@layout/fragment_report_menu" >
 
+        <action
+            android:id="@+id/action_nav_reports_to_nav_report_fragment"
+            app:destination="@id/nav_report_fragment" />
+        <action
+            android:id="@+id/action_nav_reports_to_nav_bot_report_fragment"
+            app:destination="@id/nav_bot_report_fragment" />
+        <action
+            android:id="@+id/action_nav_reports_to_nav_displacement_fragment"
+            app:destination="@id/nav_displacement_fragment" />
+        <action
+            android:id="@+id/action_nav_reports_to_nav_print_report_fragment"
+            app:destination="@id/nav_print_report_fragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_report_fragment"
+        android:name="com.example.sa_assistant.ui.reports.ReportsFragment"
+        android:label="@string/menu_reports"
+        tools:layout="@layout/fragment_reports" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_bot_report_fragment"
+        android:name="com.example.sa_assistant.ui.reports.BotReportFragment"
+        android:label="@string/kbsa"
+        tools:layout="@layout/fragment_bot_report" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_displacement_fragment"
+        android:name="com.example.sa_assistant.ui.reports.DisplacementFragment"
+        android:label="@string/displacement"
+        tools:layout="@layout/fragment_displacement" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_print_report_fragment"
+        android:name="com.example.sa_assistant.ui.reports.PrintRepFragment"
+        android:label="@string/print_rep"
+        tools:layout="@layout/fragment_print_rep" >
     </fragment>
 
     <fragment
         android:id="@+id/nav_users"
         android:name="com.example.sa_assistant.ui.users.UsersFragment"
-        android:label="@string/Users"
+        android:label="@string/menu_users"
         tools:layout="@layout/fragment_users" >
-
     </fragment>
 
     <fragment
@@ -49,5 +87,26 @@
         android:label="@string/menu_notes"
         tools:layout="@layout/fragment_notes_choose_shop" >
 
+        <action
+            android:id="@+id/action_nav_notes_choose_shop_to_nav_shop_note"
+            app:destination="@id/nav_shop_note" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_shop_note"
+        android:name="com.example.sa_assistant.ui.notes.ShopNoteFragment"
+        android:label="Заметка магазина"
+        tools:layout="@layout/fragment_shop_note" />
+
+    <fragment
+        android:id="@+id/nav_utils"
+        android:name="com.example.sa_assistant.ui.utils.UtilsFragment"
+        android:label="@string/menu_utils"
+        tools:layout="@layout/fragment_utils" />
+
+    <fragment
+        android:id="@+id/nav_reference"
+        android:name="com.example.sa_assistant.ui.reference.ReferenceFragment"
+        android:label="@string/menu_reference"
+        tools:layout="@layout/fragment_reference" />
 </navigation>

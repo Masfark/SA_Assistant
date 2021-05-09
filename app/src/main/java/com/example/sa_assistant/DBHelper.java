@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 10;
+    public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ShopsDB";
     public static final String TABLE_SHOPS = "Shops";
     public static final String TABLE_USERS = "Users";
@@ -23,10 +23,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_NUMBER = "number";
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_CITY = "city";
+    public static final String KEY_RES_NUM = "reserve_number";
     public static final String KEY_OOO = "ooo";
     public static final String KEY_NOTE = "note";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
+    public static final String KEY_TIME_START = "start_time";
+    public static final String KEY_TIME_END = "end_time";
     public static final String KEY_REPORT = "report";
     public static final String KEY_REPORT_CHECK = "report_check";
 
@@ -38,10 +41,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_SHOPS + "(" + KEY_ID + " integer primary key,"
                 + KEY_NUMBER + " integer,"
-                + KEY_ADDRESS + " text,"
                 + KEY_CITY + " text,"
+                + KEY_ADDRESS + " text,"
                 + KEY_OOO + " text,"
-                + KEY_NOTE + " text" + ")");
+                + KEY_RES_NUM + " text,"
+                + KEY_NOTE + " text,"
+                + KEY_TIME_START + " text,"
+                + KEY_TIME_END + " text" + ")");
 
         db.execSQL("create table " + TABLE_USERS + "(" + KEY_ID_USER + " integer primary key,"
                 + KEY_USERNAME + " text" + ")");
@@ -56,11 +62,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (DATABASE_VERSION < 9) {
+        if (DATABASE_VERSION < 11) {
             db.execSQL("create table " + TABLE_KBSA_REPORTS + "(" + KEY_ID_REPORT + " integer primary key,"
                     + KEY_REPORT + " text," + KEY_REPORT_CHECK + " text" + ")");
+            db.execSQL("alter table " + TABLE_SHOPS + " add " + KEY_NOTE + " text");
         }
-        db.execSQL("alter table " + TABLE_SHOPS + " add " + KEY_NOTE + " text");
+
     }
 
     @Override
@@ -68,4 +75,6 @@ public class DBHelper extends SQLiteOpenHelper {
         super.onDowngrade(db, oldVersion, newVersion);
 
     }
+
+
 }

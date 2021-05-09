@@ -23,9 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sa_assistant.DBHelper;
 import com.example.sa_assistant.R;
-import com.example.sa_assistant.adapters.BotReportsAdapter;
-import com.example.sa_assistant.adapters.SpinCursorAdapter;
-import com.example.sa_assistant.ui.shop_list.ActivityAddShop;
+import com.example.sa_assistant.adapters.Adapters;
 
 public class BotReportFragment extends Fragment implements View.OnClickListener {
 
@@ -82,7 +80,7 @@ public class BotReportFragment extends Fragment implements View.OnClickListener 
         if (cursor.getCount() == 0) {
             spinShops.setAdapter(emptyChoose);
         } else {
-            SpinCursorAdapter adapter = new SpinCursorAdapter(getActivity(), cursor);
+            Adapters.SpinCursorAdapter adapter = new Adapters.SpinCursorAdapter(getActivity(), cursor);
             spinShops.setAdapter(adapter);
         }
 
@@ -91,8 +89,8 @@ public class BotReportFragment extends Fragment implements View.OnClickListener 
 
     public void reportsListCreate() {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT _id, report, report_check FROM Kbsa_reports", null);
-        BotReportsAdapter adapter = new BotReportsAdapter(getContext());
+        //Cursor cursor = database.rawQuery("SELECT _id, report, report_check FROM Kbsa_reports", null);
+        Adapters.BotReportsAdapter adapter = new Adapters.BotReportsAdapter(getContext());
         recyclerViewReports.setAdapter(adapter);
     }
 

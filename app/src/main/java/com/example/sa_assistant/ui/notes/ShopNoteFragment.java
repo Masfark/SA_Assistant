@@ -32,7 +32,7 @@ public class ShopNoteFragment extends Fragment {
         if (getArguments() != null) {
             position = getArguments().getInt("position",0);
             address = getArguments().getString("address", "");
-            note = getArguments().getString("note", "");
+            note = getArguments().getString("note",  "");
         }
     }
 
@@ -47,15 +47,12 @@ public class ShopNoteFragment extends Fragment {
 
         dbHelper = new DBHelper(getActivity());
         database = dbHelper.getWritableDatabase();
-        cursor = database.rawQuery("SELECT _id, note FROM Shops", null);
+        cursor = database.rawQuery("SELECT _id, note FROM Shops ORDER BY number ASC", null);
 
-        if (note.equals("")) {
-            et_shop_note.requestFocus();
-        }
-        else {
+        if (!note.equals("")) {
             et_shop_note.setText(note);
-            et_shop_note.requestFocus();
         }
+        et_shop_note.requestFocus();
 
         return root;
     }
@@ -68,7 +65,7 @@ public class ShopNoteFragment extends Fragment {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DBHelper.KEY_NOTE, note);
         String id = cursor.getString(cursor.getColumnIndex("_id"));
-        database.update(dbHelper.TABLE_SHOPS, contentValues, dbHelper.KEY_ID + "= ?", new String[]{id});
+        database.update(DBHelper.TABLE_SHOPS, contentValues, DBHelper.KEY_ID + "= ?", new String[]{id});
         database.close();
     }
 }

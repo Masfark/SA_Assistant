@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sa_assistant.DBHelper;
 import com.example.sa_assistant.R;
-import com.example.sa_assistant.adapters.SaCursorAdapter;
+import com.example.sa_assistant.adapters.Adapters;
 
 public class ActivityDelUser extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,7 +37,7 @@ public class ActivityDelUser extends AppCompatActivity implements View.OnClickLi
         dbHelper = new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         Cursor cursor = database.rawQuery("SELECT _id, username FROM Users", null);
-        SaCursorAdapter adapter = new SaCursorAdapter(this, cursor);
+        Adapters.SaCursorAdapter adapter = new Adapters.SaCursorAdapter(this, cursor);
         spinDelUser.setAdapter(adapter);
         database.close();
     }

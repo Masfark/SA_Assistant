@@ -9,13 +9,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.sa_assistant.DBHelper;
 import com.example.sa_assistant.R;
-import com.example.sa_assistant.adapters.BotReportsAdapter;
-import com.example.sa_assistant.adapters.SaCursorAdapter;
-import com.example.sa_assistant.adapters.SpinBotRepAdapter;
+import com.example.sa_assistant.adapters.Adapters;
 
 public class ActivityDelBotReport extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,7 +42,7 @@ public class ActivityDelBotReport extends AppCompatActivity implements View.OnCl
             spinReps.setAdapter(emptyChoose);
         }
         else {
-            SpinBotRepAdapter adapter = new SpinBotRepAdapter(this, cursor);
+            Adapters.SpinBotRepAdapter adapter = new Adapters.SpinBotRepAdapter(this, cursor);
             spinReps.setAdapter(adapter);
         }
 
